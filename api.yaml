@@ -1,0 +1,102 @@
+openapi: 3.0.3
+info:
+  title: Onboarding - OpenAPI 3.0
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+tags:
+  - name: students
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /students:
+    put:
+      tags:
+        - students
+      summary: Change some about a student
+      description: Change some about a student by Id
+      operationId: updateStudent
+      requestBody:
+        description: Change some about a student
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Students'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Students'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Students'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Students'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Students'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Student not found
+        '405':
+          description: Validation exception
+    post:
+      tags:
+        - students
+      summary: Add a new students 
+      description: Add a new students 
+      operationId: addStudents
+      requestBody:
+        description: Create a new students
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Students'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Students'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Students'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Students'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Students'
+        '405':
+          description: Invalid input
+            - read:students
+components:
+  schemas:
+    Students:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: "Fabrich"
+        birthdate:
+          type: string
+          example: "2004-05-18"
