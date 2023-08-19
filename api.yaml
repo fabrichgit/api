@@ -275,7 +275,10 @@ components:
         birthdate:
           type: string
           example: "2004-05-18"
-
+    StudentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Student'
     Teacher:
       type: object
       properties:
