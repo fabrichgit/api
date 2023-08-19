@@ -16,37 +16,28 @@ tags:
     externalDocs:
       description: Find out more
       url: http://swagger.io
+  - name: teachers
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
 paths:
   /students:
-    put:
+    get:  
       tags:
         - students
-      summary: Change some about a student
-      description: Change some about a student by Id
-      operationId: updateStudent
-      requestBody:
-        description: Change some about a student
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Students'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Students'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Students'
-        required: true
+      summary: Get a student
+      description: Get a student by Id
+      operationId: getStudent
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Students'          
+                $ref: '#/components/schemas/Student'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Students'
+                $ref: '#/components/schemas/Student'
         '400':
           description: Invalid ID supplied
         '404':
@@ -56,38 +47,222 @@ paths:
     post:
       tags:
         - students
-      summary: Add a new students 
-      description: Add a new students 
-      operationId: addStudents
+      summary: Add a new student
+      description: Add a new student
+      operationId: addStudent
       requestBody:
-        description: Create a new students
+        description: Create a new student
+        required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Students'
+              $ref: '#/components/schemas/Student'
           application/xml:
             schema:
-              $ref: '#/components/schemas/Students'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Students'
-        required: true
+              $ref: '#/components/schemas/Student'
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Students'          
+                $ref: '#/components/schemas/Student'
             application/xml:
               schema:
-                $ref: '#/components/schemas/Students'
+                $ref: '#/components/schemas/Student'
         '405':
           description: Invalid input
-            - read:students
+    put:
+      tags:
+        - students
+      summary: Update a student
+      description: Update a student by Id
+      operationId: updateStudent
+      parameters:
+        - name: studentId
+          in: path
+          description: ID of the student to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update information for a student
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Student'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Student'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Student not found
+        '405':
+          description: Validation exception
+    delete:
+      tags:
+        - students
+      summary: Delete a student
+      description: Delete a student by Id
+      operationId: deleteStudent
+      parameters:
+        - name: studentId
+          in: path
+          description: ID of the student to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Student'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Student'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Student not found
+        '405':
+          description: Validation exception
+
+  /teachers:
+    get:
+      tags:
+        - teachers
+      summary: Get a list of teachers
+      description: Get a list of all teachers
+      operationId: getTeachers
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeacherList'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/TeacherList'
+        # Other responses
+    post:
+      tags:
+        - teachers
+      summary: Add a new teacher
+      description: Add a new teacher
+      operationId: addTeacher
+      requestBody:
+        description: Create a new teacher
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Teacher'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Teacher'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+        '405':
+          description: Invalid input
+    put:
+      tags:
+        - teachers
+      summary: Update a teacher
+      description: Update a teacher by Id
+      operationId: updateTeacher
+      parameters:
+        - name: teacherId
+          in: path
+          description: ID of the teacher to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Update information for a teacher
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Teacher'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Teacher'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Teacher not found
+        '405':
+          description: Validation exception
+    delete:
+      tags:
+        - teachers
+      summary: Delete a teacher
+      description: Delete a teacher by Id
+      operationId: deleteTeacher
+      parameters:
+        - name: teacherId
+          in: path
+          description: ID of the teacher to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Teacher'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Teacher not found
+        '405':
+          description: Validation exception
+
 components:
   schemas:
-    Students:
+    Student:
       type: object
       properties:
         id:
@@ -100,3 +275,31 @@ components:
         birthdate:
           type: string
           example: "2004-05-18"
+
+    Teacher:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: "Toky"
+        lastname:
+          type: string
+          example: "Ramarozaka"
+        courses:
+          type: array
+          items:
+            type: string
+            example: "Prog2"
+      required:
+        - name
+        - surname
+        - courses
+
+    TeacherList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Teacher'
